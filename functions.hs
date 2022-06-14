@@ -2,6 +2,8 @@ module functions where
 
 import Data.Char
 
+--Maximum of 2 number
+
  max2 :: (Int,Int) -> Int
  max2 (a,b) = if (a>b)
               then a
@@ -32,6 +34,7 @@ import Data.Char
                   then a
                   else b
 
+-- Maximum of 3 numbers 
  max3 :: (Int,Int,Int) -> Int
  max3 (a,b,c) = max2 (max2 (a,b),c)
 
@@ -46,6 +49,7 @@ import Data.Char
  max3c (a,b,c) | (a>=b) && (a>=c) = a
                | (b>=a) && (b>=c) = b
 	       | otherwise = c
+
 
  tri :: (Float,Float,Float) -> Bool
  tri (a,b,c) = if (a+b > c) && (a+c > b) && (b+c > a)
