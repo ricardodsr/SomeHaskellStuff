@@ -4,14 +4,14 @@ import Char
 import System.Random -- Isto e para a funcao dado
 import Base
 
---------------------------------Instancia do agente----------------------------------------------------------------------------------------------------------
+
 instance Show Agente where
  show (A f d i c e) =      "\n\tForca: "++(show f)++"\n"++
                      	   "\tDestreza: "++(show d)++"\n"++
                            "\tInteligencia: "++(show i)++"\n"++
                            "\tCarisma: "++(show c)++"\n\n"++
                            "\tFundos: "++(show e)++"\n"
---------------------------------------------Questao 2 com ui ja formatado-----------------------------------------------------------------------------------------------
+
 playerskill :: IO Agente
 playerskill = do{
                      f<-atributos;
@@ -63,8 +63,7 @@ abilidades x meta = do{
 
 playerAg :: Agente -> IO()
 playerAg a = do putStr (show a)
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------Questao 3-----------------------------------------------------------------------------------------
+
 
 makepal :: Palavra -> String
 makepal [] = ""
@@ -120,10 +119,6 @@ euroaux s (x:xs) = if (s /= x) then (euroaux s xs)
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------Questao 4----------------------------------------------------------------------------------------
-
--- Este codigo foi copiado do trabalho de Laboratorios para a utilizaçao na questao 4 do trabalho pratico
---------------------funcoes em comum-------------------------------------------------------------------------------------------------------------------------
-
 maiusculas :: String -> String
 maiusculas [] = []
 maiusculas (x:xs) = toUpper x : maiusculas xs
@@ -138,7 +133,6 @@ assemblar a = filtra(maiusculas a)
 --
 
 ----------------------Cifra de Cesar----------------------------------------------------------------
---A Funcao a utilizar é a cifrar. Ex: cifrar "oioi" 3
 
 cesar1 :: Palavra -> Int -> Palavra
 cesar1 []  _ = []
@@ -150,7 +144,6 @@ cifrar :: Palavra -> Int -> Palavra
 cifrar a@(x:xs) y = cesar1 (assemblar a) y
 
 -----------------------Decifra a cifra de cesar-----------------------------------------------
---A Funcao a utilizar é a decifrar. Ex decifrar "RLRL" 3
 
 decifrar :: Palavra -> Int -> Palavra
 decifrar a@(x:xs) y = decif (assemblar a) y 
@@ -162,7 +155,7 @@ decif x 0 = x
 decif (x:xs) y = if ( ((ord x - mod y 26) >= 65) && ((ord x - mod y 26) <= 90) )  then (chr (ord x - mod y 26)) : decif xs y
                   else (chr ((ord x - mod y 26)+26)) : decif xs y
 -- VIGENERE
---A Funcao a utilizar é a cifrarV. Ex: cifarV "oioioi" "ola"
+--A Funcao a utilizar Ã© a cifrarV. Ex: cifarV "oioioi" "ola"
 
 cifrarV :: String -> String -> String
 cifrarV [] _ = []
@@ -174,7 +167,7 @@ cifrarVaux s@(x:xs) c@(y:ys) d  = if (tail c == "") then cifrar (x:[]) ((ord y)-
                                   else  cifrar (x:[]) ((ord y)-65) ++ cifrarVaux xs ys d
 
 --Aqui foi desenhada a decifragem de vigenere.
---A Funcao a utilizar é a decifV. Ex: decifV "CTOWZI" "ola"
+--A Funcao a utilizar Ã© a decifV. Ex: decifV "CTOWZI" "ola"
 decifV :: String -> String -> String
 decifV [] _ = []
 decifV s@(x:xs) c = decifVaux (assemblar s) (assemblar c) (assemblar c)
@@ -185,7 +178,7 @@ decifVaux s@(x:xs) c@(y:ys) d = if (tail c == "") then decif (x:[]) ((ord y)+65)
 				else decif (x:[]) ((ord y)+65) ++ decifVaux xs ys d
 
 
-----------------------------------------------------------Questao 6---------------------------------------------------------------------------------------------
+
 vericFundos :: Int -> Int -> IO Bool
 vericFundos afund x = do return(afund>=x)
 
@@ -195,7 +188,7 @@ verifAg x meta = do{
                      return(((div (x-10) 2) + roll)>=meta)
                     }
 
---------------------------------------------------------------Qustao 7------------------------------------------------------------------------------------------
+-
 
 
 --- Geradores ---
