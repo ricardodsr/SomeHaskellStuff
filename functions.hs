@@ -83,7 +83,7 @@ import Data.Char
                             where r = sqrt (b^2 - 4*a*c)
  
  
- --------------------------------------------- Viagens
+ --------------------------------------------- Viagens------
  type Horas = (Int,Int)
  type Etapa = (Horas,Horas)
  type Viagem = [Etapa]
