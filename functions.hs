@@ -68,6 +68,7 @@ import Data.Char
  oppa (2,(b1,b2)) = b1 - b2
  oppa (a,b) = 0
 
+--Formula resolvente
  numr :: Float -> Float -> Float -> Float
  numr a b c = let x = b^2 - 4*a*c
               in if x < 0
@@ -76,6 +77,8 @@ import Data.Char
                       then 1
                       else 2
 
+
+--Formula resolvente
  raizes :: Float -> Float -> Float -> [Float]
  raizes a b c | numr a b c == 0 = []
               | numr a b c == 1 = [ -b / (2 * a) ]
