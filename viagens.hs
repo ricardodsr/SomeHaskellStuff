@@ -1,6 +1,5 @@
 module viagens where
-
-import Data.Char
+    import Data.Char
  
  --------------------------------------------- Viagens------
  type Horas = (Int,Int)
