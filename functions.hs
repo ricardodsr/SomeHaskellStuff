@@ -2,31 +2,33 @@ module functions where
 
 import Data.Char
 
---Maximum of 2 number
+-- Maximum of 2 numbers
 
+--This function takes a tuple of two integers and returns the maximum value
  max2 :: (Int,Int) -> Int
  max2 (a,b) = if (a>b)
               then a
               else b
 
+--This function takes a tuple of two integers and returns the maximum value using pattern matching
  max2a :: (Int,Int) -> Int
  max2a (a,b) | a > b = a
              | otherwise = b
 
-
+--This function takes a tuple of two integers and returns the maximum value using pattern matching
  max2b :: (Int,Int) -> Int
  max2b c | fst c > snd c = fst c
          | otherwise = snd c
 
-
-
+--This function takes a tuple of two integers and returns the maximum value using where clause
  max2c :: (Int,Int) -> Int
  max2c c = if a>b
            then a
            else b
-	   where a=fst c
+       where a=fst c
                  b=snd c
 
+--This function takes a tuple of two integers and returns the maximum value using let clause
  max2d :: (Int, Int) -> Int
  max2d c = let a = fst c
                b = snd c
@@ -34,224 +36,232 @@ import Data.Char
                   then a
                   else b
 
--- Maximum of 3 numbers 
+-- Maximum of 3 numbers
+--This function takes a tuple of three integers and returns the maximum value
  max3 :: (Int,Int,Int) -> Int
  max3 (a,b,c) = max2 (max2 (a,b),c)
 
+--This function takes a tuple of three integers and returns the maximum value
  max3b :: (Int,Int,Int) -> Int
  max3b (a,b,c) = if (a >= b) && (a >= c)
- 		 then a
-		 else if b >= c
+          then a
+         else if b >= c
                       then b
                       else c
 
+--This function takes a tuple of three integers and returns the maximum value using pattern matching
  max3c :: (Int,Int,Int) -> Int
  max3c (a,b,c) | (a>=b) && (a>=c) = a
                | (b>=a) && (b>=c) = b
-	       | otherwise = c
+           | otherwise = c
 
 
- tri :: (Float,Float,Float) -> Bool
- tri (a,b,c) = if (a+b > c) && (a+c > b) && (b+c > a)
-               then True
-               else False
+-- tri function checks if three sides can form a triangle
+tri :: (Float,Float,Float) -> Bool
+tri (a,b,c) = if (a+b > c) && (a+c > b) && (b+c > a)
+               then True  -- return True if the sides can form a triangle
+               else False -- return False if the sides can't form a triangle
 
- opp :: (Int, (Int,Int)) -> Int
- opp z = if ((fst z) == 1)
-         then (fst (snd z)) + (snd (snd z))
+-- opp function takes a pair (Int, (Int,Int)) and returns the result of an operation on its second component
+opp :: (Int, (Int,Int)) -> Int
+opp z = if ((fst z) == 1)
+         then (fst (snd z)) + (snd (snd z))  -- return the sum if the first component of the pair is 1
          else if ((fst z) == 2)
-              then (fst (snd z)) - (snd (snd z))
-              else 0
+              then (fst (snd z)) - (snd (snd z))  -- return the difference if the first component of the pair is 2
+              else 0  -- return 0 if the first component of the pair is anything other than 1 or 2
 
- oppa :: (Int , (Int,Int)) -> Int 
- oppa (1,(b1,b2)) = b1 + b2
- oppa (2,(b1,b2)) = b1 - b2
- oppa (a,b) = 0
+-- oppa is a simplified version of opp
+oppa :: (Int , (Int,Int)) -> Int 
+oppa (1,(b1,b2)) = b1 + b2 -- return the sum if the first component of the pair is 1
+oppa (2,(b1,b2)) = b1 - b2 -- return the difference if the first component of the pair is 2
+oppa (a,b) = 0  -- return 0 if the first component of the pair is anything other than 1 or 2
 
---Formula resolvente
- numr :: Float -> Float -> Float -> Float
- numr a b c = let x = b^2 - 4*a*c
+-- numr returns the number of roots of a quadratic equation
+numr :: Float -> Float -> Float -> Float
+numr a b c = let x = b^2 - 4*a*c
               in if x < 0
-                 then 0
+                 then 0  -- return 0 if the equation has no real roots
                  else if x == 0
-                      then 1
-                      else 2
+                      then 1  -- return 1 if the equation has one real root
+                      else 2  -- return 2 if the equation has two real roots
 
-
---Formula resolvente
- raizes :: Float -> Float -> Float -> [Float]
- raizes a b c | numr a b c == 0 = []
-              | numr a b c == 1 = [ -b / (2 * a) ]
-              | otherwise = [ (-b - r) / (2*a), (-b +r) / (2*a) ]
+-- raizes returns a list of the roots of a quadratic equation
+raizes :: Float -> Float -> Float -> [Float]
+raizes a b c | numr a b c == 0 = []  -- return an empty list if the equation has no real roots
+              | numr a b c == 1 = [ -b / (2 * a) ]  -- return a list with one root if the equation has one real root
+              | otherwise = [ (-b - r) / (2*a), (-b +r) / (2*a) ]  -- return a list with two roots if the equation has two real roots
                             where r = sqrt (b^2 - 4*a*c)
- 
- isSpace' :: Char -> Bool
- isSpace' c = if (c==' ') then True else False
 
- isUpper' :: Char -> Bool
- isUpper' c = (c >= 'A') && (c <= 'Z')
+-- isSpace' checks if a character is a space
+isSpace' :: Char -> Bool
+isSpace' c = if (c==' ') then True else False
 
- isAlpha' :: Char -> Bool
- isAlpha' c = (isUpper c) || (isLower c)
+-- isUpper' checks if a character is an uppercase letter
+isUpper' :: Char -> Bool
+isUpper' c = (c >= 'A') && (c <= 'Z')
 
- toUpper' :: Char -> Char
- toUpper' c = if (isLower c)
-              then chr ((ord 'A')+(ord c)-(ord 'a'))
-              else c
+-- isAlpha' checks if a character is a letter
+isAlpha' :: Char -> Bool
+isAlpha' c = (isUpper c) || (isLower c)
 
- digitToInt' :: Char -> Int
- digitToInt' c | isDigit c = (ord c) - (ord '0')
-               | (c >= 'a') && (c<='f') = (ord c) - (ord 'a') + 10
-               | (c >= 'A') && (c<='F') = (ord c) - (ord 'A') + 10
-               | otherwise = error "not a digit."
+-- toUpper' function takes a character c as input and returns an uppercase version of the character if it is a lowercase letter, else returns the character itself.
+toUpper' :: Char -> Char
+toUpper' c = if (isLower c) -- if c is a lowercase letter
+then chr ((ord 'A')+(ord c)-(ord 'a')) -- convert to uppercase by subtracting the ASCII value of a and adding the ASCII value of A
+else c -- return c as it is if it is already an uppercase letter or not an alphabet
 
- intToDigit' :: Int -> Char
- intToDigit' n | (n>=0) && (n<=9) = chr (n + (ord '0'))
-               | (n>=10) && (n<=15) = chr (n - 10 + (ord 'a'))
-               | otherwise = error "not a digit"    
+-- digitToInt' function takes a character c as input and returns the corresponding integer representation of the digit if c is a digit or a hexadecimal character, else raises an error "not a digit."
+digitToInt' :: Char -> Int
+digitToInt' c | isDigit c = (ord c) - (ord '0') -- if c is a decimal digit, return the integer representation by subtracting the ASCII value of 0
+| (c >= 'a') && (c<='f') = (ord c) - (ord 'a') + 10 -- if c is a lowercase hexadecimal digit, return the integer representation by subtracting the ASCII value of a and adding 10
+| (c >= 'A') && (c<='F') = (ord c) - (ord 'A') + 10 -- if c is an uppercase hexadecimal digit, return the integer representation by subtracting the ASCII value of A and adding 10
+| otherwise = error "not a digit." -- raise an error if c is not a digit or a hexadecimal character
 
- unwords' :: [String] -> String
- unwords' [] = ""
- unwords' (x:xs) = x ++ " " ++ (unwords' xs)
+-- intToDigit' function takes an integer n as input and returns the corresponding character representation of the digit if n is in the range [0, 9] or [10, 15], else raises an error "not a digit".
+intToDigit' :: Int -> Char
+intToDigit' n | (n>=0) && (n<=9) = chr (n + (ord '0')) -- if n is in the range [0, 9], return the character representation by adding the ASCII value of 0
+| (n>=10) && (n<=15) = chr (n - 10 + (ord 'a')) -- if n is in the range [10, 15], return the character representation by subtracting 10 and adding the ASCII value of a
+| otherwise = error "not a digit" -- raise an error if n is not in the specified range
 
- limpa :: [String] -> [String]
- limpa [] = []
- limpa (x:xs) = if (x == "")
-                then limpa xs
-                else x:(limpa xs)
+-- unwords' function takes a list of strings [String] as input and returns a concatenated string formed by inserting a space character between each pair of words.
+unwords' :: [String] -> String
+unwords' [] = "" -- return an empty string if the input list is empty
+unwords' (x:xs) = x ++ " " ++ (unwords' xs) -- concatenate the first word x with a space and the result of recursively calling unwords' on the rest of the list xs
 
- paragrafo :: String -> [String]
- paragrafo s = let linhas = lines s
---                in [ x | x <- linhas , x /= "" ]
-               in limpa linhas 
+-- 'limpa' is a function that takes a list of strings as input and returns a list of strings.
+-- The function removes all empty strings from the input list.
+limpa :: [String] -> [String]
+limpa [] = []
+limpa (x:xs) = if (x == "")
+then limpa xs
+else x:(limpa xs)
 
- separa :: String -> (String,String)
- separa "" = ("","")
- separa ('.':xs) = ("",xs)
- separa (x:xs) = let (a,b) = separa xs
-                 in (x:a,b)
+-- 'paragrafo' is a function that takes a string as input and returns a list of strings.
+-- The function splits the input string into separate lines (using the 'lines' function)
+-- and removes all empty strings from the list of lines using the 'limpa' function.
+paragrafo :: String -> [String]
+paragrafo s = let linhas = lines s
+in limpa linhas
 
- frases :: String -> [String]
- frases "" = []
- frases s = let (a,b) = separa s
-            in a:(frases b)
+-- 'separa' is a function that takes a string as input and returns a tuple of two strings.
+-- The function splits the input string into two parts, using the first dot ('.') as the separator.
+-- The first part of the tuple is everything before the dot, and the second part is everything after the dot.
+-- If there is no dot in the input string, the function returns an empty string as the first part of the tuple.
+separa :: String -> (String,String)
+separa "" = ("","")
+separa ('.':xs) = ("",xs)
+separa (x:xs) = let (a,b) = separa xs
+in (x:a,b)
+
+-- 'frases' is a function that takes a string as input and returns a list of strings.
+-- The function splits the input string into separate sentences using the 'separa' function.
+frases :: String -> [String]
+frases "" = []
+frases s = let (a,b) = separa s
+in a:(frases b)
 
 
+-- | length' calculates the length of a list.
 length' :: [a] -> Int
- length' [] = 0
- length' (h:t) = 1 + length' t
+-- | Base case, the length of an empty list is 0.
+length' [] = 0
+-- | Recursive case, the length of a non-empty list is 1 plus the length of its tail.
+length' (h:t) = 1 + length' t
 
- div' :: Int -> Int -> Int
- div' n d | d > n = 0
-          | otherwise = 1 + div' (n-d) d
+-- | div' calculates the integer division of two integers.
+div' :: Int -> Int -> Int
+-- | If the divisor is greater than the dividend, the result is 0.
+div' n d | d > n = 0
+-- | Otherwise, the result is 1 plus the result of dividing the difference of the dividend and the divisor.
+div' n d | otherwise = 1 + div' (n-d) d
 
- mod' :: Int -> Int -> Int
- mod' n d | d > n = n
-          | otherwise = mod' (n-d) d
+-- | mod' calculates the modulo of two integers.
+mod' :: Int -> Int -> Int
+-- | If the divisor is greater than the dividend, the result is the dividend.
+mod' n d | d > n = n
+-- | Otherwise, the result is the modulo of the difference of the dividend and the divisor.
+mod' n d | otherwise = mod' (n-d) d
 
- divMod' :: Int -> Int -> (Int,Int)
- divMod' n d | d > n = (0,n)
-             | otherwise = let (a,b) = divMod' (n-d) d
+-- | divMod' calculates the tuple of the integer division and modulo of two integers.
+divMod' :: Int -> Int -> (Int,Int)
+-- | If the divisor is greater than the dividend, the result is a tuple of 0 and the dividend.
+divMod' n d | d > n = (0,n)
+-- | Otherwise, the result is the result of dividing and taking the modulo of the difference of the dividend and the divisor.
+divMod' n d | otherwise = let (a,b) = divMod' (n-d) d
                            in (a+1,b)
 
- take' :: Int -> [a] -> [a]
- take' _ [] = []
- take' 0 _ = []
- take' n (x:xs) = x:take' (n-1) xs
+-- | take' returns the first n elements of a list.
+take' :: Int -> [a] -> [a]
+-- | Base case, returns an empty list if n is 0 or the list is empty.
+take' _ [] = []
+take' 0 _ = []
+-- | Recursive case, returns the first element of the list followed by the result of taking n-1 elements from the tail of the list.
+take' n (x:xs) = x:take' (n-1) xs
 
- drop' :: Int -> [a] -> [a]
- drop' _ [] = []
- drop' 0 l = l
- drop' n (x:xs) = drop' (n-1) xs
+-- | drop' removes the first n elements of a list.
+drop' :: Int -> [a] -> [a]
+-- | Base case, returns an empty list if the list is empty.
+drop' _ [] = []
+-- | If n is 0, returns the original list.
+drop' 0 l = l
+-- | Recursive case, returns the result of dropping n-1 elements from the tail of the list.
+drop' n (x:xs) = drop' (n-1) xs
 
- splitAt' :: Int -> [a] -> ([a],[a])
- splitAt' _ [] = ([],[])
- splitAt' 0 l = ([],l)
- splitAt' n (x:xs) = let (a,b) = splitAt' (n-1) xs
+-- splitAt' takes an integer 'n' and a list of elements 'l', and splits the list 'l' into two parts at the nth position
+splitAt' :: Int -> [a] -> ([a],[a])
+
+-- If the list 'l' is empty, return two empty lists
+splitAt' _ [] = ([],[])
+
+-- If the position 'n' is 0, return an empty list as the first part and the original list as the second part
+splitAt' 0 l = ([],l)
+
+-- If the position 'n' is not 0, split the list at the (n-1)th position and add the first element to the first part and the rest to the second part
+splitAt' n (x:xs) = let (a,b) = splitAt' (n-1) xs
                      in (x:a,b)
+                     
+-- g takes an integer 'n' and returns True if 'n' is greater than or equal to 10, and False otherwise
+g :: Int -> Bool
+g n | n >= 10 = True
+    | otherwise = False
 
- g :: Int -> Bool
- g n | n >= 10 = True
-     | otherwise = False
+-- takeWhile' takes a function 'f' and a list 'l', and returns a list of elements from the start of 'l' as long as 'f x' is True for each element 'x'
+takeWhile' :: (a -> Bool) -> [a] -> [a]
 
- takeWhile' :: (a -> Bool) -> [a] -> [a]
- takeWhile' _ [] = []
- takeWhile' f (x:xs) | f x = x:takeWhile' f xs
-                     | otherwise =  []
+-- If the list 'l' is empty, return an empty list
+takeWhile' _ [] = []
 
- dropWhile' :: (a -> Bool) -> [a] -> [a]
- dropWhile' _ [] = []
- dropWhile' f (x:xs) | f x = dropWhile' f xs
-                     | otherwise = (x:xs)
+-- If 'f x' is True, add the element 'x' to the result list and repeat the process for the rest of the list
+takeWhile' f (x:xs) | f x = x:takeWhile' f xs
 
- break' :: (a -> Bool) -> [a] -> ([a],[a])
- break' _ [] = ([],[])
- break' f (x:xs) | f x = let (a,b) = break' f xs
+-- If 'f x' is False, return an empty list
+                    | otherwise =  []
+
+-- dropWhile' takes a function 'f' and a list 'l', and returns a list of elements from the start of 'l' as long as 'f x' is False for each element 'x'
+dropWhile' :: (a -> Bool) -> [a] -> [a]
+
+-- If the list 'l' is empty, return an empty list
+dropWhile' _ [] = []
+
+-- If 'f x' is True, drop the element 'x' and repeat the process for the rest of the list
+dropWhile' f (x:xs) | f x = dropWhile' f xs
+
+-- If 'f x' is False, return the rest of the list
+                    | otherwise = (x:xs)
+
+-- break' takes a function 'f' and a list 'l', and splits the list 'l' into two parts where the first part consists of elements for which 'f x' is True and the second part consists of elements for which 'f x' is False
+break' :: (a -> Bool) -> [a] -> ([a],[a])
+
+-- If the list 'l' is empty, return two empty lists
+break' _ [] = ([],[])
+
+-- If 'f x' is True, add the element 'x' to the first part and repeat the process for the rest of the list
+break' f (x:xs) | f x = let (a,b) = break' f xs
                          in (x:a,b)
-                 | otherwise = ([],x:xs)
+                | otherwise = ([],x:xs)
 				 
 			
 
-type Bit = Bool
-bitToInt :: Bit -> Int
-bitToInt False = 0
-bitToInt True  = 1
-
-intToBit :: Int -> Bit
-intToBit 0 = False
-intToBit 1 = True
-
-intToBList :: Int -> [Bit]
-intToBList 0 = []
-intToBList n | n > 0 = ((intToBit b):(intToBList r))
-    where (r,b) = divMod n 2
-
-bListToInt :: [Bit] -> Int
-bListToInt [] = 0
-bListToInt (h:t) = (bitToInt h) + 2*(bListToInt t)
---ou entao
-bListToInt' l = foldr f 0 l
-   where f h t = (bitToInt h) + 2*t
-
-tabuada :: Bit -> Bit -> Bit -> (Bit, Bit) -- (res, carry)
-tabuada False False False = (False, False)
-tabuada False False True  = (True,  False)
-tabuada False True  False = (True,  False)
-tabuada True  False False = (True,  False)
-tabuada False True  True  = (False, True )
-tabuada True  False True  = (False, True )
-tabuada True  True  False = (False, True )
-tabuada True  True  True  = (True,  True )
-
-soma :: [Bit] -> [Bit] -> [Bit]
-soma as bs = fst (somaComCarry False as bs)
-
-somaComCarry :: Bit -> [Bit] -> [Bit] -> ([Bit], Bit)
-somaComCarry c (a:as) (b:bs) 
-     = let (r,c') = tabuada a b c
-           (x,y)  = somaComCarry c' as bs
-       in (r:x,y)
-somaComCarry c l1 l2 = (limpaCarry c (l1 ++ l2),False)
-
-limpaCarry True [] = [True]
-limpaCarry True (True:t) = False:(limpaCarry True t)
-limpaCarry True (False:t) = True:t
-limpaCarry False t = t
-
-multiplica :: [Bit]-> [Bit] -> [Bit]
-multiplica n [b] = multiplicaB n b
-multiplica n (h:t) = soma (multiplicaB n h) (False:(multiplica n t))
---ou entao
-multiplica' n1 n2 = foldr (f n1) [] n2
-    where f n h t = soma (multiplicaB n h) (False:t)
-multiplicaB x True = x
-multiplicaB _ _ = []
-
-mult :: Int -> Int -> Int
-mult x y = let bx = intToBList x
-               by = intToBList y
-               br = multiplica bx by
-           in bListToInt br
 
  type Coeficiente = Int
  type Polinomio = [Coeficiente]
