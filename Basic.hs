@@ -118,3 +118,38 @@ limpa :: [String] -> [String]
  frases "" = []
  frases s = let (a,b) = separa s
             in a:(frases b)
+
+
+-- Complete functions explanations :
+
+-- module basic defines some basic functions in Haskell including finding maximum of two or three numbers, checking if a set of three numbers form a triangle, finding a mathematical operation given an integer and two values, formula resolvente (solution of quadratic equation), cleaning a list of strings, converting a string into a list of strings separated by lines or dots, and breaking down a string into a list of sentences.
+
+-- max2 (a,b): function that finds the maximum value between two integers a and b using if-then-else statement.
+
+-- max2a (a,b): function that finds the maximum value between two integers a and b using guards.
+
+-- max2b (c): function that finds the maximum value between two integers where c is a tuple. The maximum value is computed based on fst c (first element of the tuple) and snd c (second element of the tuple).
+
+-- max2c (c): function to find the maximum value between two integers. c is the tuple and where clause extracts the first (fst c) and second (snd c) elements of type int from the tuple. If a > b then a else b returns the maximum value between a and b.
+
+-- max2d (c): similar to max2c but uses let-in statement instead of where clause.
+
+-- max3 (a,b,c), max3b (a,b,c) and max3c (a,b,c): functions to find the maximum of three integers a, b and c. max3 implements it by using max2, max3b uses if-then-else statement, while max3c uses guards.
+
+-- tri (a, b, c): function that checks if a set of three floating point numbers a, b and c form a triangle or not.
+
+-- opp (z): function that computes a mathematical operation (addition or subtraction) given an integer and a tuple of values. Use of if-then-else statement.
+
+-- oppa (a, b): similar to opp but using pattern matching instead of if-then-else statement.
+
+-- numr (a, b, c): function that computes the solution of a quadratic equation using if-then-else statement.
+
+-- raizes (a, b, c): function that computes the solution(s) of a quadratic equation using guards.
+
+-- limpa (lst): function that cleans a list of strings by filtering out the empty strings.
+
+-- paragrafo (s): function that breaks down a string into a list of strings separated by lines. lines method splits the string into lines and limpa is called on the resulting list to filter out empty strings.
+
+-- separa (s): function that splits a string into two parts at the first . (dot) encountered. Returns two parts as a tuple.
+
+-- frases (s): function that breaks down a string into a list of sentences using separa to repeatedly split the string at the first dot encountered.
