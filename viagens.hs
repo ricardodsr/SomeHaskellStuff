@@ -1,6 +1,25 @@
 module viagens where
     import Data.Char
- 
+
+--------------------Explanations ----------------------------------
+{-
+    This code defines a Haskell module named "viagens" (Portuguese for trips). It imports the Data.Char module.
+
+    It defines custom data types Horas (hour), Etapa (stage), and Viagem (trip) to represent hours, a stage of a trip, and a full trip respectively.
+
+    Functions:
+
+maisTarde: returns True if the first Horas parameter is later than the second
+diferenca: determines the difference in minutes between two hours
+testaEtapa: tests if the Etapa argument is valid
+testaLigacao: tests if two stages are connected
+testaViagem: tests if the Viagem argument is valid
+tempoEtapa: determines the duration of an Etapa argument in minutes
+tempoEfectivo: determines the effective time of a full Viagem in minutes
+tempoTotal: calculates the total time of a Viagem from the first to the last stage
+
+
+-}
  --------------------------------------------- Viagens------
  type Horas = (Int,Int)
  type Etapa = (Horas,Horas)

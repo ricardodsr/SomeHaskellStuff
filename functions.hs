@@ -260,9 +260,16 @@ break' f (x:xs) | f x = let (a,b) = break' f xs
                          in (x:a,b)
                 | otherwise = ([],x:xs)
 				 
-			
+{--
 
+   The code defines a data type Polinomio which is a list of type Coeficiente (integers). It then defines three functions that operate on Polinomios:
 
+somapol accepts two Polinomios and returns their element-wise sum as another Polinomio.
+mulpol accepts two Polinomios and returns the polynomial product of both by calling somalistas on the result of geralistas.
+somalistas accepts a list of Polinomios and performs a right fold operation to element-wise sum all the polynomials.
+geralistas accepts a Polinomio p, a Polinomio p2, and a list of integers cs, and returns a list of shifted Polinomios by appending (*x) p to cs in every iteration.
+
+--}			
  type Coeficiente = Int
  type Polinomio = [Coeficiente]
 
