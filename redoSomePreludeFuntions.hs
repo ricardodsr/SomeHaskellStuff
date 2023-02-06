@@ -83,3 +83,16 @@ length' :: [a] -> Int
  break' f (x:xs) | f x = let (a,b) = break' f xs
                          in (x:a,b)
                  | otherwise = ([],x:xs)
+
+-- All functions explained 
+
+-- isSpace' :: Char -> Bool: checks if a character is a space or not.
+-- isUpper' :: Char -> Bool: checks if a character is an uppercase letter or not.
+-- isAlpha' :: Char -> Bool: checks if a character is a letter (upper or lowercase).
+-- toUpper' :: Char -> Char: converts a lowercase character to uppercase.
+-- digitToInt' :: Char -> Int: converts a digit in character form to integer.
+-- intToDigit' :: Int -> Char: converts an integer to digit character representation.
+-- unwords' :: [String] -> String: concatenates a list of strings with a space in between.
+-- length' :: [a] -> Int: returns the length of a list.
+-- div' :: Int -> Int -> Int, mod' :: Int -> Int -> Int and divMod' :: Int -> Int -> (Int,Int) return the integer division and modulo results for 2 integers
+-- takeWhile', dropWhile', break': return sublists of input list that retain/remove/split values wherever a condition specified by the input function is met.
