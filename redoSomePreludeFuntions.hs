@@ -78,6 +78,15 @@ length' :: [a] -> Int
  dropWhile' f (x:xs) | f x = dropWhile' f xs
                      | otherwise = (x:xs)
 
+
+dropWhile'' :: (a -> Bool) -> [a] -> [a]
+dropWhile'' _ [] = []
+dropWhile'' f (x:xs) = 
+  if f x 
+    then dropWhile'' f xs 
+    else (x:xs)
+
+
  break' :: (a -> Bool) -> [a] -> ([a],[a])
  break' _ [] = ([],[])
  break' f (x:xs) | f x = let (a,b) = break' f xs
